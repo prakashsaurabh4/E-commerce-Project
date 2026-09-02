@@ -6,7 +6,6 @@ const path = require("path");
 dotenv.config();
 
 const connectDB = require("./config/db");
-const userRoutes = require("./routes/authRouts");
 
 connectDB();
 
@@ -36,9 +35,12 @@ app.use("/api/payment", require("./routes/paymentRoutes"));
 const frontendBuildPath = path.join(__dirname, "../frontend/build");
 app.use(express.static(frontendBuildPath));
 
-// For all non-API GET requests, return React's index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(frontendBuildPath, "index.html"));
+// React SPA Catch-all
+app.use((req, res, next) => {
+  if (req.method === "GET" && !req.path.startsWith("/api")) {
+    return res.sendFile(path.resolve(frontendBuildPath, "index.html"));
+  }
+  next();
 });
 
 const PORT = process.env.PORT || 5000;
