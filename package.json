@@ -1,0 +1,23 @@
+{
+  "name": "fastshop-full-stack",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "saurabh",
+    "microservice"
+  ],
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+  "install-all": "npm install --prefix backend && npm install --prefix frontend",
+  "dev:server": "npm run dev --prefix backend",
+  "dev:client": "npm start --prefix frontend",
+  "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+  "build": "npm run build --prefix frontend"
+},
+  "dependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
